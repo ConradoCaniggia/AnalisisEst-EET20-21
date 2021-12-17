@@ -2,4 +2,4 @@
 
 Repositorio de archivos correspondientes al Análisis Estadístico del Ensayo de Estrés Térmico 2020/2021.
 
-Correo electrónico: `[conradocaniggia@gmail.com](mailto:conradocaniggia@gmail.com)`
+Correo electrónico: conradocaniggia@gmail.com
