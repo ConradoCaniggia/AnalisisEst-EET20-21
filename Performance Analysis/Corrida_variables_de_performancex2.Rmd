@@ -1,0 +1,138 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+```{r}
+CMS <- read.table("clipboard", header=TRUE, stringsAsFactors=TRUE, sep="\t", na.strings="NA", dec=",", 
+  strip.white=TRUE)
+```
+
+```{r}
+Tapply(CMS ~ TRATR, var, na.action=na.omit, data=CMS) # variances by group
+leveneTest(CMS ~ TRATR, data=CMS, center="mean")
+```
+
+```{r}
+normalityTest(CMS ~ TRATR, test="shapiro.test", data=CMS)
+```
+
+```{r}
+normalityTest(~CMS, test="shapiro.test", data=CMS)
+```
+
+```{r}
+CMSxTrat_block <- (aov(CMS ~ Pi+TRATR, data=CMS))
+Anova(CMSxTrat_block)
+TukeyHSD(CMSxTrat_block)
+old.oma <- par(oma=c(0,5,0,0))
+.Pairs <- glht(CMSxTrat_block, linfct = mcp(Pi = "Tukey"))
+confint(.Pairs) # confidence intervals
+mtext('Pi')
+plot(confint(.Pairs))
+.Pairs <- glht(CMSxTrat_block, linfct = mcp(TRATR = "Tukey"))
+confint(.Pairs) # confidence intervals
+plot(confint(.Pairs))
+par(old.oma)
+remove(.Pairs)
+```
+
+```{r}
+Tabla_completa <- read.table("clipboard", header=TRUE, stringsAsFactors=TRUE, sep="\t", 
+  na.strings="NA", dec=",", strip.white=TRUE)
+```
+
+```{r}
+Tapply(EC ~ TRATR, var, na.action=na.omit, data=Tabla_completa) # variances by group
+leveneTest(EC ~ TRATR, data=Tabla_completa, center="mean")
+```
+
+```{r}
+normalityTest(~EC, test="shapiro.test", data=Tabla_completa)
+```
+
+```{r}
+AnovaModel.2 <- (aov(EC ~ Pi+TRATR, data=Tabla_completa))
+Anova(AnovaModel.2)
+TukeyHSD(AnovaModel.2)
+old.oma <- par(oma=c(0,5,0,0))
+.Pairs <- glht(AnovaModel.2, linfct = mcp(Pi = "Tukey"))
+confint(.Pairs) # confidence intervals
+mtext('Pi')
+plot(confint(.Pairs))
+.Pairs <- glht(AnovaModel.2, linfct = mcp(TRATR = "Tukey"))
+confint(.Pairs) # confidence intervals
+plot(confint(.Pairs))
+par(old.oma)
+remove(.Pairs)
+```
+
+```{r}
+Tapply(EC2 ~ TRATR, var, na.action=na.omit, data=Tabla_completa) # variances by group
+leveneTest(EC2 ~ TRATR, data=Tabla_completa, center="mean")
+```
+
+```{r}
+normalityTest(~EC2, test="shapiro.test", data=Tabla_completa)
+```
+
+```{r}
+AnovaModel.3 <- (aov(EC2 ~ Pi+TRATR, data=Tabla_completa))
+Anova(AnovaModel.3)
+TukeyHSD(AnovaModel.3)
+old.oma <- par(oma=c(0,5,0,0))
+.Pairs <- glht(AnovaModel.3, linfct = mcp(Pi = "Tukey"))
+confint(.Pairs) # confidence intervals
+mtext('Pi')
+plot(confint(.Pairs))
+.Pairs <- glht(AnovaModel.3, linfct = mcp(TRATR = "Tukey"))
+confint(.Pairs) # confidence intervals
+plot(confint(.Pairs))
+par(old.oma)
+remove(.Pairs)
+```
+
+```{r}
+Tapply(GDP ~ TRATR, var, na.action=na.omit, data=Tabla_completa) # variances by group
+leveneTest(GDP ~ TRATR, data=Tabla_completa, center="mean")
+```
+
+```{r}
+normalityTest(~GDP, test="shapiro.test", data=Tabla_completa)
+```
+
+```{r}
+AnovaModel.4 <- (aov(GDP ~ Pi+TRATR, data=Tabla_completa))
+Anova(AnovaModel.4)
+TukeyHSD(AnovaModel.4)
+old.oma <- par(oma=c(0,5,0,0))
+.Pairs <- glht(AnovaModel.4, linfct = mcp(Pi = "Tukey"))
+confint(.Pairs) # confidence intervals
+mtext('Pi')
+plot(confint(.Pairs))
+.Pairs <- glht(AnovaModel.4, linfct = mcp(TRATR = "Tukey"))
+confint(.Pairs) # confidence intervals
+plot(confint(.Pairs))
+par(old.oma)
+remove(.Pairs)
+```
+
